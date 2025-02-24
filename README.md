@@ -1,10 +1,14 @@
-# Interpreting and Editing Vision-Language Representations to Mitigate Hallucinations
-Official PyTorch Implementation
+# Internal Compass: Zooming Zero-Shot Image Classification with Internal Confidence
 
-[Nick Jiang](https://nickjiang.me), [Anish Kachinthaya](https://anishk.me), [Suzanne Petryk](https://suziepetryk.com/), [Yossi Gandelsman](https://yossigandelsman.github.io/)
-### [Paper](https://arxiv.org/pdf/2410.02762) | [Project Page](https://anishk23733.github.io/vl-interp/)
+This repository contains the code for **Internal Compass**, a research project exploring zero-shot image classification using internal confidence scores from Vision-Language Models (VLMs). The work builds on mechanistic interpretability techniques to analyze internal representations of VLMs, improving zero-shot classification performance.
 
-![Teaser](images/teaser.png)
+## Features
+- Zero-shot image classification using Vision-Language Models.
+- Internal confidence-based classification using **Logit Lens**.
+- Support for **InstructBLIP** and **LLaVA** models.
+- Tested on **CIFAR-10** dataset.
+
+---
 
 ## Setup
 
@@ -41,50 +45,29 @@ The configs for InstructBLIP models are under `src/caption/lavis/configs/`.
 
 In order to get InstructBLIP (7B) working, you should download the [pretrained model weights](https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/InstructBLIP/instruct_blip_vicuna7b_trimmed.pth) and [vicuna7b weights](https://huggingface.co/lmsys/vicuna-7b-v1.1).
 
+## 📊 Results
+
+We tested the method on **CIFAR-10** and compared it with standard models:
+
+| **Method**                 | **Accuracy (%)** |
+|----------------------------|-----------------|
+| EfficientNet (Supervised)  | 89.32%          |
+| ResNet18 (Supervised)     | 90.89%          |
+| ViT (Supervised)          | 96.70%          |
+| SimCLR (One-Shot)        | 93.20%          |
+| CLIP (Zero-Shot)         | 95.10%          |
+| SigLIP (Zero-Shot)       | 95.32%          |
+| **Our Method (Zero-Shot)** | 82.31%          |
+
+
+
+
 ```
-# download wts
-mkdir ../wts
-wget https://storage.googleapis.com/sfr-vision-language-research/LAVIS/models/InstructBLIP/instruct_blip_vicuna7b_trimmed.pth
-wget https://huggingface.co/lmsys/vicuna-7b-v1.1
-```
-
-In `src/caption/lavis/configs/blip2_instruct_vicuna7b.yaml`, set the `pretrained` location to the pretrained weight path and `llm_model` to the vicuna7b weight path.
-
-## Demos
-
-Our paper presents two primary methods to interpret and edit VL representations. The first method creates a model confidence score for model-generated objects by projecting image representations to the language vocabulary and taking a max softmax score of the output probabilities. Our second method targets and removes objects from image captions by subtracting the text embeddings of targeted objects from these image representations.
-
-To explore internal model confidences and their applications for hallucination detection and zero-shot segmentation, check out `demos/internal_confidence.ipynb`.
-
-To erase objects by editing internal representations, run `demos/object_erasure.ipynb`.
-
-## Evals
-
-Generated captions for the hallucination reduction task (Section 5.2) are in `log_results/`. To evaluate CHAIR scores, run
-```
-python3 metric/chair.py --cap_file <log_file> --cache metric/chair.pkl
-```
-
-You may need to run the following in your conda environment before CHAIR works:
-```
->>> import nltk
->>> nltk.download('punkt_tab')
-```
-
-## BibTeX
-```
-@misc{jiang2024interpretingeditingvisionlanguagerepresentations,
-      title={Interpreting and Editing Vision-Language Representations to Mitigate Hallucinations},
-      author={Nick Jiang and Anish Kachinthaya and Suzie Petryk and Yossi Gandelsman},
-      year={2024},
-      eprint={2410.02762},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2410.02762},
+@misc{pal2024internalcompass,
+  title={Internal Compass: Zooming Zero-Shot Image Classification with Internal Confidence},
+  author={Himanshu Pal, Snigdha Agarwal, Uday Bhaskar},
+  institution={IIIT Hyderabad},
+  year={2024}
 }
 ```
 
-## Acknowledgments
-We thank Kayo Yin for her comments and feedback on our paper. YG is supported by the Google
-Fellowship. As part of their affiliation with UC Berkeley, authors were supported in part by the the
-Berkeley Artificial Intelligence Research (BAIR) commons program.
