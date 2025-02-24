@@ -1,6 +1,6 @@
 # Internal Compass: Zooming Zero-Shot Image Classification with Internal Confidence
 
-This repository contains the code for **Internal Compass**, a research project exploring zero-shot image classification using internal confidence scores from Vision-Language Models (VLMs). The work builds on mechanistic interpretability techniques to analyze internal representations of VLMs, improving zero-shot classification performance.
+This repository contains the code for **Internal Compass**, a course project exploring zero-shot image classification using internal confidence scores from Vision-Language Models (VLMs). The work builds on mechanistic interpretability techniques to analyze internal representations of VLMs, improving zero-shot classification performance.
 
 ## Features
 - Zero-shot image classification using Vision-Language Models.
