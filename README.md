@@ -15,7 +15,7 @@ This repository contains the code for **Internal Compass**, a research project e
 ### Files
 ```
 git clone https://github.com/ansh997/incom.git
-cd vl-interp
+cd incom
 ```
 
 ### Environment
